@@ -16,14 +16,6 @@ public final class Bishop extends Piece {
         super(PieceType.BISHOP, alliance, piecePosition, isFirstMove);
     }
 
-    private static Map<Integer, MoveUtils.Line[]> computeCandidates() {
-        for (int position = 0; position < BoardUtils.NUM_TILES; position++) {
-            final List<MoveUtils.Line> lines = new ArrayList<>();
-            for (int offset : CANDIDATE_MOVE_COORDINATES) {
-                int destination = position;
-            }
-        }
-    }
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
@@ -47,3 +39,4 @@ public final class Bishop extends Piece {
 
 
 }
+
