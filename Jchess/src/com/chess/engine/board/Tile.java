@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class Tile{
     protected final int tileCoordinate;
-    private static final Map<Integer, EmptyTile> EMPTY_TILES = creatAllPossibleEmptyTiles();
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = creatAllPossibleEmptyTiles();
     
     private static Map<Integer, EmptyTile> creatAllPossibleEmptyTiles(){
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
@@ -15,8 +15,8 @@ public abstract class Tile{
         return ImmutableMap.copyOf(emptyTileMap);
     }
 
-    public static Tile creatTile(final int tileCoordinate, final Peice peice){
-        return peice != null ? new OccuipiedTile(tileCoordinate, peice): EmptyTile.get(tileCoordinate);
+    public static Tile creatTile(final int tileCoordinate, final Piece piece){
+        return peice != null ? new OccuipiedTile(tileCoordinate, piece): EMPTY_TILES_CACHE.get(tileCoordinate);
     }
 
     private Tile (int tileCoordinate){
