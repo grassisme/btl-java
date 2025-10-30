@@ -1,5 +1,14 @@
+import com.chess.engine.Alliance;
+import com.chess.engine.board.Board;
+import com.chess.engine.board.Move;
+import com.chess.engine.board.Tile;
+import com.chess.engine.pieces.Piece;
+
+import java.util.ArrayList;
 import java.util.Collection;
-public class rook extends Piece{
+import java.util.List;
+
+public class rook extends Piece {
     private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-8, -1, 1, 8};
     // xe di theo 2 huong thang dung len xuong, nhu vay xe di chuyen theo chuan do thi Oxy -> (+/-)1
     // tuy nhien khi tien len thi se theo dang lui/tien vuot cot/hang ngoai cung ->(+/-)8
