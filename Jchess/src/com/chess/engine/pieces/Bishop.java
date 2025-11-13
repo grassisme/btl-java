@@ -13,7 +13,7 @@ public final class Bishop extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
     private final static Map<Integer, MoveUtils.Line[]> PRECOMPUTED_CANDIDATES = computeCandidates();
 
-    Bishop(final Alliance alliance,
+    public Bishop(final Alliance alliance,
            final int piecePosition,
            final boolean isFirstMove) {
         super(PieceType.BISHOP, alliance, piecePosition, isFirstMove);

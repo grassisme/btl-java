@@ -13,6 +13,15 @@ public abstract class Piece{
         this.pieceAlliance = pieceAlliance;
         this.piecePosition = piecePosition;
     }
+    public int getPiecePosition(){
+        return this.piecePosition;
+    }
+    public Alliance getPieceAlliance(){
+        return this.pieceAlliance;
+    }
+    public boolean isFirstMove(){
+        return this.isFirstMove();
+    }
 
     public abstract List<Move> calculateLegalMoves(final Board board);
 }

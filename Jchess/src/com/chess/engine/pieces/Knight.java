@@ -12,7 +12,7 @@ import java.util.List;
 public class Knight extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-17, -15, -10, -6, 6, 10, 15, 17};
 
-    Knight(final Alliance alliance,
+    public Knight(final Alliance alliance,
            final int piecePosition,
            final boolean isFirstMove) {
         super(PieceType.KNIGHT, alliance, piecePosition, isFirstMove);
