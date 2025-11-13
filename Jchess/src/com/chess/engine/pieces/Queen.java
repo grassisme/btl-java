@@ -10,27 +10,27 @@ import com.chess.engine.board.MoveUtils;
 
 import java.util.*;
 
-public final class Bishop extends Piece {
+public final class Queen extends Piece {
 
-    private final static int[] CANDIDATE_MOVE_COORDINATES = {-9, -7, 7, 9};
+    private final static int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
     private final static Map<Integer, MoveUtils.Line[]> PRECOMPUTED_CANDIDATES = computeCandidates();
 
-    public Bishop(final Alliance alliance,
-           final int piecePosition,
-           final boolean isFirstMove) {
-        super(PieceType.BISHOP, alliance, piecePosition, isFirstMove);
+    Queen(final Alliance alliance,
+          final int piecePosition,
+          final boolean isFirstMove) {
+        super(PieceType.QUEEN, alliance, piecePosition, isFirstMove);
     }
 
     private static Map<Integer, MoveUtils.Line[]> computeCandidates() {
         final Map<Integer, MoveUtils.Line[]> candidates = new HashMap<>();
         for (int position = 0; position < BoardUtils.NUM_TILES; position++) {
-            final List<MoveUtils.Line> lines = new ArrayList<>();
+            List<MoveUtils.Line> lines = new ArrayList<>();
             for (int offset : CANDIDATE_MOVE_COORDINATES) {
                 int destination = position;
-                MoveUtils.Line line = new MoveUtils.Line();
+                final MoveUtils.Line line = new MoveUtils.Line();
                 while (BoardUtils.isValidTileCoordinate(destination)) {
                     if (isFirstColumnExclusion(destination, offset) ||
-                            isEighthColumnExclusion(destination, offset)) {
+                        isEighthColumnExclusion(destination, offset)) {
                         break;
                     }
                     destination += offset;
@@ -73,12 +73,12 @@ public final class Bishop extends Piece {
 
     @Override
     public int locationBonus() {
-        return this.pieceAlliance.bishopBonus(this.piecePosition);
+        return this.pieceAlliance.queenBonus(this.piecePosition);
     }
 
     @Override
-    public Bishop getMovedPiece(final Move move) {
-        return PieceUtils.INSTANCE.getBishop(move.getMovedPiece().getPieceAllegiance(), move.getDestinationCoordinate(), true);
+    public Queen getMovedPiece(final Move move) {
+        return PieceUtils.INSTANCE.getQueen(move.getMovedPiece().getPieceAllegiance(), move.getDestinationCoordinate(), true);
     }
 
     @Override
@@ -88,14 +88,14 @@ public final class Bishop extends Piece {
 
     private static boolean isFirstColumnExclusion(final int position,
                                                   final int offset) {
-        return (BoardUtils.FIRST_COLUMN.get(position) &&
-                ((offset == -9) || (offset == 7)));
+        return BoardUtils.FIRST_COLUMN.get(position) && ((offset == -9)
+                || (offset == -1) || (offset == 7));
     }
 
     private static boolean isEighthColumnExclusion(final int position,
                                                    final int offset) {
-        return BoardUtils.EIGHTH_COLUMN.get(position) &&
-                ((offset == -7) || (offset == 9));
+        return BoardUtils.EIGHTH_COLUMN.get(position) && ((offset == -7)
+                || (offset == 1) || (offset == 9));
     }
 
 }
