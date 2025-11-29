@@ -1,3 +1,4 @@
+
 package com.chess.engine.pieces;
 
 import com.chess.engine.Alliance;
