@@ -15,7 +15,7 @@ public final class Queen extends Piece {
     private final static int[] CANDIDATE_MOVE_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
     private final static Map<Integer, MoveUtils.Line[]> PRECOMPUTED_CANDIDATES = computeCandidates();
 
-    Queen(final Alliance alliance,
+    public Queen(final Alliance alliance,
           final int piecePosition,
           final boolean isFirstMove) {
         super(PieceType.QUEEN, alliance, piecePosition, isFirstMove);
