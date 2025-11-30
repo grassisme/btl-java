@@ -29,35 +29,35 @@ public enum PieceUtils {
                         final int destinationCoordinate,
                         final boolean hasMoved) {
         return hasMoved ? ALL_POSSIBLE_MOVED_PAWNS.get(alliance).get(destinationCoordinate) :
-                          ALL_POSSIBLE_UNMOVED_PAWNS.get(alliance).get(destinationCoordinate);
+                ALL_POSSIBLE_UNMOVED_PAWNS.get(alliance).get(destinationCoordinate);
     }
 
     public Knight getKnight(final Alliance alliance,
                             final int destinationCoordinate,
                             final boolean hasMoved) {
         return hasMoved ? ALL_POSSIBLE_MOVED_KNIGHTS.get(alliance).get(destinationCoordinate) :
-                          ALL_POSSIBLE_UNMOVED_KNIGHTS.get(alliance).get(destinationCoordinate);
+                ALL_POSSIBLE_UNMOVED_KNIGHTS.get(alliance).get(destinationCoordinate);
     }
 
     public Bishop getBishop(final Alliance alliance,
                             final int destinationCoordinate,
                             final boolean hasMoved) {
         return hasMoved ? ALL_POSSIBLE_MOVED_BISHOPS.get(alliance).get(destinationCoordinate) :
-                          ALL_POSSIBLE_UNMOVED_BISHOPS.get(alliance).get(destinationCoordinate);
+                ALL_POSSIBLE_UNMOVED_BISHOPS.get(alliance).get(destinationCoordinate);
     }
 
     public  Rook getRook(final Alliance alliance,
                          final int destinationCoordinate,
                          final boolean hasMoved) {
         return hasMoved ? ALL_POSSIBLE_MOVED_ROOKS.get(alliance).get(destinationCoordinate) :
-                          ALL_POSSIBLE_UNMOVED_ROOKS.get(alliance).get(destinationCoordinate);
+                ALL_POSSIBLE_UNMOVED_ROOKS.get(alliance).get(destinationCoordinate);
     }
 
     public Queen getQueen(final Alliance alliance,
                           final int destinationCoordinate,
                           final boolean hasMoved) {
         return hasMoved ? ALL_POSSIBLE_MOVED_QUEENS.get(alliance).get(destinationCoordinate) :
-                          ALL_POSSIBLE_UNMOVED_QUEENS.get(alliance).get(destinationCoordinate);
+                ALL_POSSIBLE_UNMOVED_QUEENS.get(alliance).get(destinationCoordinate);
     }
 
     public King getKing(final Alliance alliance,
@@ -65,7 +65,7 @@ public enum PieceUtils {
                         final boolean isCastled,
                         final boolean hasMoved) {
         return hasMoved ? ALL_POSSIBLE_MOVED_KINGS.get(alliance).get(destinationCoordinate).get(isCastled) :
-                          ALL_POSSIBLE_UNMOVED_KINGS.get(alliance).get(destinationCoordinate).get(isCastled);
+                ALL_POSSIBLE_UNMOVED_KINGS.get(alliance).get(destinationCoordinate).get(isCastled);
     }
 
     private static Map<Alliance, Map<Integer, Pawn>> createAllPossiblePawns(final boolean hasMoved) {
