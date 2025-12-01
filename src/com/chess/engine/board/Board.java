@@ -154,7 +154,6 @@ public final class Board {
 
     private static Board createStandardBoardImpl() {
         final Builder builder = new Builder();
-        // Black Layout
         builder.setPiece(PieceUtils.INSTANCE.getRook(Alliance.BLACK, 0, false));
         builder.setPiece(PieceUtils.INSTANCE.getKnight(Alliance.BLACK, 1, false));
         builder.setPiece(PieceUtils.INSTANCE.getBishop(Alliance.BLACK, 2, false));
@@ -172,7 +171,6 @@ public final class Board {
         builder.setPiece(PieceUtils.INSTANCE.getPawn(Alliance.BLACK, 14, false));
         builder.setPiece(PieceUtils.INSTANCE.getPawn(Alliance.BLACK, 15, false));
 
-        // White Layout
         builder.setPiece(PieceUtils.INSTANCE.getPawn(Alliance.WHITE, 48, false));
         builder.setPiece(PieceUtils.INSTANCE.getPawn(Alliance.WHITE, 49, false));
         builder.setPiece(PieceUtils.INSTANCE.getPawn(Alliance.WHITE, 50, false));
@@ -189,7 +187,7 @@ public final class Board {
         builder.setPiece(PieceUtils.INSTANCE.getBishop(Alliance.WHITE, 61, false));
         builder.setPiece(PieceUtils.INSTANCE.getKnight(Alliance.WHITE, 62, false));
         builder.setPiece(PieceUtils.INSTANCE.getRook(Alliance.WHITE, 63, false));
-        //white to move
+
         builder.setMoveMaker(Alliance.WHITE);
 
         return builder.build();
