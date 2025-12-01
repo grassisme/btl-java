@@ -58,7 +58,6 @@ public final class Table {
         this.boardDirection = BoardDirection.NORMAL;
         this.highlightLegalMoves = false;
 
-        // Sửa đường dẫn ảnh về simple mặc định
         this.pieceIconPath = "art/simple/";
 
         this.gameHistoryPanel = new GameHistoryPanel();
@@ -105,7 +104,6 @@ public final class Table {
     }
 
     void handleMoveMade(final Move move, final PlayerType playerType) {
-        // Xoay bàn cờ sau mỗi nước đi
         this.boardDirection = this.boardDirection.opposite();
         this.show();
 
@@ -145,7 +143,6 @@ public final class Table {
         final JMenu filesMenu = new JMenu("File");
         filesMenu.setMnemonic(KeyEvent.VK_F);
 
-        // Chỉ giữ lại Load FEN, bỏ Load/Save PGN
         final JMenuItem openFEN = new JMenuItem("Load FEN File", KeyEvent.VK_F);
         openFEN.addActionListener(_ -> {
             String fenString = JOptionPane.showInputDialog("Input FEN");
@@ -233,7 +230,7 @@ public final class Table {
         if(!log.isEmpty()) {
             final Move lastMove = Table.get().getMoveLog().removeMove(Table.get().getMoveLog().size() - 1);
             this.chessBoard = this.chessBoard.currentPlayer().unMakeMove(lastMove).getToBoard();
-            this.boardDirection = this.boardDirection.opposite(); // Flip lại khi undo
+            this.boardDirection = this.boardDirection.opposite();
             this.show();
         }
     }
@@ -343,10 +340,7 @@ public final class Table {
                                 chessBoard = transition.getToBoard();
                                 moveLog.addMove(move);
                                 invokeLater(() -> {
-                                    gameHistoryPanel.redo(chessBoard, moveLog);
-                                    takenPiecesPanel.redo(moveLog);
                                     Table.get().moveMadeUpdate(PlayerType.HUMAN, moveLog.getMoves().get(moveLog.size() - 1));
-                                    boardPanel.drawBoard(chessBoard);
                                 });
                             }
                             sourceTile = null;
@@ -367,7 +361,6 @@ public final class Table {
             assignTileColor();
             assignTilePieceIcon(board);
             highlightTileBorder(board);
-            highlightLegals(board);
             validate();
             repaint();
         }
@@ -379,20 +372,6 @@ public final class Table {
                 setBorder(BorderFactory.createLineBorder(Color.cyan));
             } else {
                 setBorder(BorderFactory.createLineBorder(Color.GRAY));
-            }
-        }
-
-        private void highlightLegals(final Board board) {
-            if (Table.get().getHighlightLegalMoves()) {
-                for (final Move move : pieceLegalMoves(board)) {
-                    if (move.getDestinationCoordinate() == this.tileId) {
-                        try {
-                            // Chú ý: Cần có file green_dot.png trong art/misc/ hoặc xóa đoạn này nếu không cần
-                            File dot = new File("art/misc/green_dot.png");
-                            if(dot.exists()) add(new JLabel(new ImageIcon(ImageIO.read(dot))));
-                        } catch (final IOException e) { e.printStackTrace(); }
-                    }
-                }
             }
         }
 
