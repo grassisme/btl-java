@@ -229,15 +229,15 @@ public abstract class Move {
 
         @Override
         public String toString() {
-            final Move decorated = this.decoratedMove; // The underlying pawn move or attack
+            final Move decorated = this.decoratedMove;
             final StringBuilder san = new StringBuilder();
             if (decorated.isAttack()) {
-                // For pawn captures, use file of from-square, 'x', and destination
+
                 final String fromFile = BoardUtils.INSTANCE.getPositionAtCoordinate(decorated.getCurrentCoordinate()).substring(0,1);
                 final String toSquare = BoardUtils.INSTANCE.getPositionAtCoordinate(decorated.getDestinationCoordinate());
                 san.append(fromFile).append("x").append(toSquare).append("=").append(this.promotionPiece.getPieceType());
             } else {
-                // For pawn push, just use destination
+
                 final String toSquare = BoardUtils.INSTANCE.getPositionAtCoordinate(decorated.getDestinationCoordinate());
                 san.append(toSquare).append("=").append(this.promotionPiece.getPieceType());
             }
@@ -360,21 +360,18 @@ public abstract class Move {
             final int[] opponentActive = this.board.currentPlayer().getAlliance().isWhite()
                     ? this.board.getBlackPieceCoordinates()
                     : this.board.getWhitePieceCoordinates();
-            // Add current player's pieces (excluding the moved one)
             for (int index : currentActive) {
                 final Piece piece = boardConfig[index];
                 if (!this.movedPiece.equals(piece)) {
                     builder.setPiece(piece);
                 }
             }
-            // Add opponent pieces (excluding the one being captured)
             for (int index : opponentActive) {
                 final Piece piece = boardConfig[index];
                 if (!piece.equals(this.getAttackedPiece())) {
                     builder.setPiece(piece);
                 }
             }
-            // Add moved piece to destination
             builder.setPiece(this.movedPiece.getMovedPiece(this));
             builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
             return builder.build();
