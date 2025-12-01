@@ -37,7 +37,6 @@ public final class WhitePlayer extends Player {
         final List<Move> kingCastles = new ArrayList<>();
 
         if(this.playerKing.isFirstMove() && this.playerKing.getPiecePosition() == 60 && !this.isInCheck()) {
-            //whites king side castle
             if(this.board.getPiece(61) == null && this.board.getPiece(62) == null) {
                 final Piece kingSideRook = this.board.getPiece(63);
                 if(kingSideRook != null && kingSideRook.isFirstMove()) {
@@ -50,7 +49,6 @@ public final class WhitePlayer extends Player {
                     }
                 }
             }
-            //whites queen side castle
             if(this.board.getPiece(59) == null && this.board.getPiece(58) == null &&
                this.board.getPiece(57) == null) {
                 final Piece queenSideRook = this.board.getPiece(56);
