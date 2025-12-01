@@ -13,12 +13,12 @@ public class DebugPanel extends JPanel {
     private final JTextArea debugTextArea;
     private final JScrollPane scrollPane;
     private final List<String> debugMessages;
-    private static final int MAX_DEBUG_MESSAGES = 100; // Limit to prevent memory issues
+    private static final int MAX_DEBUG_MESSAGES = 100;
 
     public DebugPanel() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(600, 150));
-        setBorder(BorderFactory.createTitledBorder("Debug Information"));
+        setBorder(BorderFactory.createTitledBorder("System Log"));
         this.debugMessages = new ArrayList<>();
         this.debugTextArea = new JTextArea();
         this.debugTextArea.setEditable(false);
@@ -29,7 +29,7 @@ public class DebugPanel extends JPanel {
         this.scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         this.scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         add(this.scrollPane, BorderLayout.CENTER);
-        // Add control buttons
+
         final JPanel buttonPanel = new JPanel(new FlowLayout());
         final JButton clearButton = new JButton("Clear");
         clearButton.addActionListener(e -> clearDebugInfo());
@@ -38,78 +38,54 @@ public class DebugPanel extends JPanel {
         buttonPanel.add(clearButton);
         buttonPanel.add(saveButton);
         add(buttonPanel, BorderLayout.SOUTH);
-        // Initialize with welcome message
-        updateProgress("Debug panel initialized - ready for AI progress updates");
+
+        logSystemInfo("Panel initialized - Ready to track game events");
     }
 
-    // Method called by the functional interface system to update AI progress
-    public void updateProgress(String progress) {
+
+    public void logGameEvent(String message) {
         SwingUtilities.invokeLater(() -> {
-            // Add timestamp to the message
-            final String message = progress + "\n";
-            // Add to our message list
-            debugMessages.add(message);
-            // Limit the number of stored messages to prevent memory issues
-            if (debugMessages.size() > MAX_DEBUG_MESSAGES) {
-                debugMessages.removeFirst();
-            }
-            // Update the text area
-            debugTextArea.append(message);
-            // Auto-scroll to bottom
-            debugTextArea.setCaretPosition(debugTextArea.getDocument().getLength());
+            appendMessage("[GAME EVENT] " + message);
         });
     }
 
-    // Method for general debug information updates
-    public void updateDebugInfo(String info) {
+    public void logSystemInfo(String info) {
         SwingUtilities.invokeLater(() -> {
-            String timestampedMessage = String.format("[%tT] DEBUG: %s%n",
-                    System.currentTimeMillis(), info);
-
-            debugMessages.add(timestampedMessage);
-
-            if (debugMessages.size() > MAX_DEBUG_MESSAGES) {
-                debugMessages.removeFirst();
-            }
-
-            debugTextArea.append(timestampedMessage);
-            debugTextArea.setCaretPosition(debugTextArea.getDocument().getLength());
+            appendMessage("[SYSTEM] " + info);
         });
     }
 
-    // Method called when game state changes (replaces the old Observer update)
+    private void appendMessage(String rawText) {
+        String timestampedMessage = String.format("[%tT] %s%n", System.currentTimeMillis(), rawText);
+
+        debugMessages.add(timestampedMessage);
+        if (debugMessages.size() > MAX_DEBUG_MESSAGES) {
+            debugMessages.removeFirst();
+        }
+
+        debugTextArea.append(timestampedMessage);
+        debugTextArea.setCaretPosition(debugTextArea.getDocument().getLength());
+    }
+
     public void redo() {
         SwingUtilities.invokeLater(() -> {
-            // Add a separator or status update when the game state changes
-            String gameStateMessage = String.format("[%tT] --- Game state updated ---%n",
-                    System.currentTimeMillis());
-
-            debugMessages.add(gameStateMessage);
-
-            if (debugMessages.size() > MAX_DEBUG_MESSAGES) {
-                debugMessages.removeFirst();
-            }
-
-            debugTextArea.append(gameStateMessage);
-            debugTextArea.setCaretPosition(debugTextArea.getDocument().getLength());
+            appendMessage("--- Board Refreshed ---");
         });
     }
 
-    // Clear all debug information
     private void clearDebugInfo() {
         SwingUtilities.invokeLater(() -> {
             debugMessages.clear();
             debugTextArea.setText("");
-            updateProgress("Debug panel cleared");
+            logSystemInfo("Logs cleared by user");
         });
     }
 
-    // Save debug log to file
     private void saveDebugLog() {
         SwingUtilities.invokeLater(() -> {
             final JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Save Debug Log");
-            fileChooser.setSelectedFile(new File("chess_debug_log.txt"));
+            fileChooser.setDialogTitle("Save Log File");
+            fileChooser.setSelectedFile(new File("chess_game_log.txt"));
             final int userSelection = fileChooser.showSaveDialog(this);
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 final File fileToSave = fileChooser.getSelectedFile();
@@ -117,12 +93,11 @@ public class DebugPanel extends JPanel {
                     for (final String message : debugMessages) {
                         writer.print(message);
                     }
-                    updateProgress("Debug log saved to: " + fileToSave.getAbsolutePath());
+                    logSystemInfo("Log saved to: " + fileToSave.getName());
                 } catch (final IOException e) {
-                    updateProgress("Error saving debug log: " + e.getMessage());
+                    logSystemInfo("Error saving log: " + e.getMessage());
                 }
             }
         });
     }
-
 }
