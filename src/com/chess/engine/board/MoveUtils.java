@@ -27,15 +27,7 @@ public enum MoveUtils {
         for (final Move move : player.getLegalMoves()) {
             if (move.isAttack()) {
                 interestingMoves.add(move);
-            } /*else {
-                final MoveTransition transition = player.makeMove(move);
-                if (transition.getMoveStatus().isDone()) {
-                    final Board afterMove = transition.getToBoard();
-                    if (afterMove.currentPlayer().isInCheck()) {
-                        interestingMoves.add(move);
-                    }
-                }
-            }*/
+            }
         }
         return interestingMoves;
     }
