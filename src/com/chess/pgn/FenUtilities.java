@@ -104,27 +104,18 @@ public class FenUtilities {
             i++;
         }
 
-        // Second pass: determine en passant pawn if applicable
         if (!enPassantSquare.equals("-")) {
             final int enPassantCoordinate = BoardUtils.INSTANCE.getCoordinateAtPosition(enPassantSquare);
 
-            // If en passant square is on rank 3 (SIXTH_ROW in your coordinate system),
-            // a white pawn just moved from rank 2 to rank 4
             if (BoardUtils.INSTANCE.SIXTH_ROW.get(enPassantCoordinate)) {
-                // White pawn just moved two squares forward
-                // The pawn is on rank 4, which is one rank "back" toward white from en passant square
-                final int pawnPosition = enPassantCoordinate - 8; // Add 8 to go toward rank 1
+                final int pawnPosition = enPassantCoordinate - 8;
                 enPassantPawn = PieceUtils.INSTANCE.getPawn(Alliance.WHITE, pawnPosition, true);
-                builder.setPiece(enPassantPawn); // Replace the pawn with moved version
+                builder.setPiece(enPassantPawn);
             }
-            // If en passant square is on rank 6 (THIRD_ROW in your coordinate system),
-            // a black pawn just moved from rank 7 to rank 5
             else if (BoardUtils.INSTANCE.THIRD_ROW.get(enPassantCoordinate)) {
-                // Black pawn just moved two squares forward
-                // The pawn is on rank 5, which is one rank "back" toward black from en passant square
-                final int pawnPosition = enPassantCoordinate + 8; // Subtract 8 to go toward rank 8
+                final int pawnPosition = enPassantCoordinate + 8;
                 enPassantPawn = PieceUtils.INSTANCE.getPawn(Alliance.BLACK, pawnPosition, true);
-                builder.setPiece(enPassantPawn); // Replace the pawn with moved version
+                builder.setPiece(enPassantPawn);
             }
 
             if (enPassantPawn != null) {
