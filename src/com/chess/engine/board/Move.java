@@ -630,10 +630,6 @@ public abstract class Move {
             throw new RuntimeException("Not instantiatable!");
         }
 
-        public static Move getNullMove() {
-            return MoveUtils.NULL_MOVE;
-        }
-
         public static Move createMove(final Board board,
                                       final int currentCoordinate,
                                       final int destinationCoordinate) {

@@ -119,35 +119,4 @@ public enum  BoardUtils {
                board.currentPlayer().isInStaleMate();
     }
 
-    public static String humanReadableElapsedTime(long millis) {
-        if (millis < 0) {
-            throw new IllegalArgumentException("Duration must be non-negative");
-        }
-
-        long seconds = millis / 1000;
-        long minutes = seconds / 60;
-        long hours = minutes / 60;
-        long days = hours / 24;
-
-        seconds %= 60;
-        minutes %= 60;
-        hours %= 24;
-
-        StringBuilder sb = new StringBuilder();
-        if (days > 0) sb.append(days).append(days == 1 ? " day" : " days");
-        if (hours > 0) {
-            if (!sb.isEmpty()) sb.append(", ");
-            sb.append(hours).append(hours == 1 ? " hour" : " hours");
-        }
-        if (minutes > 0) {
-            if (!sb.isEmpty()) sb.append(", ");
-            sb.append(minutes).append(minutes == 1 ? " minute" : " minutes");
-        }
-        if (seconds > 0 || sb.isEmpty()) {
-            if (!sb.isEmpty()) sb.append(", ");
-            sb.append(seconds).append(seconds == 1 ? " second" : " seconds");
-        }
-        return sb.toString();
-    }
-
 }

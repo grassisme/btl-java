@@ -1,25 +1,23 @@
 package com.chess.gui;
 
-import com.chess.gui.Table.PlayerType;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameSetup extends JDialog {
-    
+
 
     GameSetup(final JFrame frame,
               final boolean modal) {
         super(frame, modal);
 
         final JPanel myPanel = new JPanel(new GridLayout(0, 1));
-        
+
         JLabel title = new JLabel("Game Options");
         title.setFont(new Font("Arial", Font.BOLD, 16));
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        
+
         getContentPane().add(myPanel);
         myPanel.add(title);
         myPanel.add(new JSeparator());

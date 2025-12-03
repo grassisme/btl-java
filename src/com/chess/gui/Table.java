@@ -26,7 +26,6 @@ public final class Table {
 
     private final JFrame gameFrame;
     private final GameHistoryPanel gameHistoryPanel;
-    private final TakenPiecesPanel takenPiecesPanel;
     private final BoardPanel boardPanel;
     private final MoveLog moveLog;
     private final GameSetup gameSetup;
@@ -59,12 +58,10 @@ public final class Table {
         this.pieceIconPath = "art/simple/";
 
         this.gameHistoryPanel = new GameHistoryPanel();
-        this.takenPiecesPanel = new TakenPiecesPanel();
         this.boardPanel = new BoardPanel();
         this.moveLog = new MoveLog();
         this.eventManager.addGameEventListener(this::processAllGameEvents);
         this.gameSetup = new GameSetup(this.gameFrame, true);
-        this.gameFrame.add(this.takenPiecesPanel, BorderLayout.WEST);
         this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
         this.gameFrame.add(this.gameHistoryPanel, BorderLayout.EAST);
         setDefaultLookAndFeelDecorated(true);
@@ -88,11 +85,9 @@ public final class Table {
     private MoveLog getMoveLog() { return this.moveLog; }
     private BoardPanel getBoardPanel() { return this.boardPanel; }
     private GameHistoryPanel getGameHistoryPanel() { return this.gameHistoryPanel; }
-    private TakenPiecesPanel getTakenPiecesPanel() { return this.takenPiecesPanel; }
 
     public void show() {
         Table.get().getGameHistoryPanel().redo(this.chessBoard, Table.get().getMoveLog());
-        Table.get().getTakenPiecesPanel().redo(Table.get().getMoveLog());
         Table.get().getBoardPanel().drawBoard(Table.get().getGameBoard());
     }
 
