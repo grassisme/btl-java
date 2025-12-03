@@ -94,11 +94,19 @@ public abstract class Move {
     }
 
     public Board undo() {
-        final Piece[] newBoardConfig = board.getBoardCopy();
-        final Builder builder = new Builder();
-        return builder.setBoardConfiguration(newBoardConfig)
-                .setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance())
-                .build();
+        final Board.Builder builder = new Board.Builder();
+
+        // 1. Đặt lại tất cả các quân cờ về vị trí CŨ
+        for (final Piece piece : this.board.getAllPieces()) {
+            builder.setPiece(piece); // (Lưu ý: Logic này có thể phức tạp hơn tùy implement của bạn)
+        }
+
+        // 2. ĐÂY LÀ DÒNG QUAN TRỌNG NHẤT BẠN ĐANG THIẾU HOẶC SAI:
+        // Phải trả quyền đi lại cho người thực hiện nước đi này (this.movedPiece.getPieceAllegiance())
+        builder.setMoveMaker(this.movedPiece.getPieceAllegiance());
+
+        return builder.build();
+
     }
 
     String disambiguation() {
