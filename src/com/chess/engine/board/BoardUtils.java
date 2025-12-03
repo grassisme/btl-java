@@ -32,126 +32,6 @@ public enum  BoardUtils {
     public static final int START_TILE_INDEX = 0;
     public static final int NUM_TILES_PER_ROW = 8;
     public static final int NUM_TILES = 64;
-    public final static int[] WHITE_PAWN_PREFERRED_COORDINATES = {
-            0,  0,  0,  0,  0,  0,  0,  0,
-            90, 90, 90, 90, 90, 90, 90, 90,
-            30, 30, 40, 60, 60, 40, 30, 30,
-            10, 10, 20, 40, 40, 20, 10, 10,
-            5,  5, 10, 20, 20, 10,  5,  5,
-            0,  0,  0,-10,-10,  0,  0,  0,
-            5, -5,-10,  0,  0,-10, -5,  5,
-            0,  0,  0,  0,  0,  0,  0,  0
-    };
-    public final static int[] BLACK_PAWN_PREFERRED_COORDINATES = {
-            0,  0,  0,  0,  0,  0,  0,  0,
-            5, -5,-10,  0,  0,-10, -5,  5,
-            0,  0,  0,-10,-10,  0,  0,  0,
-            5,  5, 10, 20, 20, 10,  5,  5,
-            10, 10, 20, 40, 40, 20, 10, 10,
-            30, 30, 40, 60, 60, 40, 30, 30,
-            90, 90, 90, 90, 90, 90, 90, 90,
-            0,  0,  0,  0,  0,  0,  0,  0
-    };
-    public final static int[] WHITE_KNIGHT_PREFERRED_COORDINATES = {
-            -50,-40,-30,-30,-30,-30,-40,-50,
-            -40,-20,  0,  5,  5,  0,-20,-40,
-            -30,  5, 10, 15, 15, 10,  5,-30,
-            -30,  5, 15, 20, 20, 15,  5,-30,
-            -30,  5, 15, 20, 20, 15,  5,-30,
-            -30,  5, 10, 15, 15, 10,  5,-30,
-            -40,-20,  0,  0,  0,  0,-20,-40,
-            -50,-40,-30,-30,-30,-30,-40,-50
-    };
-    public final static int[] BLACK_KNIGHT_PREFERRED_COORDINATES = {
-            -50,-40,-30,-30,-30,-30,-40,-50,
-            -40,-20,  0,  0,  0,  0,-20,-40,
-            -30,  5, 10, 15, 15, 10,  5,-30,
-            -30,  5, 15, 20, 20, 15,  5,-30,
-            -30,  5, 15, 20, 20, 15,  5,-30,
-            -30,  5, 10, 15, 15, 10,  5,-30,
-            -40,-20,  0,  5,  5,  0,-20,-40,
-            -50,-40,-30,-30,-30,-30,-40,-50,
-    };
-    public final static int[] WHITE_BISHOP_PREFERRED_COORDINATES = {
-            -20,-10,-10,-10,-10,-10,-10,-20,
-            -10,  5,  0,  0,  0,  0,  5,-10,
-            -10, 10, 10, 10, 10, 10, 10,-10,
-            -10,  0, 10, 15, 15, 10,  0,-10,
-            -10,  5, 10, 15, 15, 10,  5,-10,
-            -10,  0, 10, 10, 10, 10,  0,-10,
-            -10, 10,  5,  0,  0,  5, 10,-10,
-            -20,-10,-10,-10,-10,-10,-10,-20
-    };
-    public final static int[] BLACK_BISHOP_PREFERRED_COORDINATES = {
-            -20,-10,-10,-10,-10,-10,-10,-20,
-            -10, 10,  5,  0,  0,  5, 10,-10,
-            -10,  0, 10, 10, 10, 10,  0,-10,
-            -10,  5, 10, 15, 15, 10,  5,-10,
-            -10,  0, 10, 15, 15, 10,  0,-10,
-            -10, 10, 10, 10, 10, 10, 10,-10,
-            -10,  5,  0,  0,  0,  0,  5,-10,
-            -20,-10,-10,-10,-10,-10,-10,-20
-    };
-    public final static int[] WHITE_ROOK_PREFERRED_COORDINATES = {
-            0,  0,  0,  5,  5,  0,  0,  0,
-            5, 10, 10, 10, 10, 10, 10,  5,
-            -5,  0,  0,  0,  0,  0,  0, -5,
-            -5,  0,  0,  0,  0,  0,  0, -5,
-            -5,  0,  0,  0,  0,  0,  0, -5,
-            -5,  0,  0,  5,  5,  0,  0, -5,
-            5, 20, 20, 25, 25, 20, 20,  5,
-            0,  0,  5, 10, 10,  5,  0,  0
-    };
-    public final static int[] BLACK_ROOK_PREFERRED_COORDINATES = {
-            0,  0,  5, 10, 10,  5,  0,  0,
-            5, 20, 20, 25, 25, 20, 20,  5,
-            -5,  0,  0,  5,  5,  0,  0, -5,
-            -5,  0,  0,  0,  0,  0,  0, -5,
-            -5,  0,  0,  0,  0,  0,  0, -5,
-            -5,  0,  0,  0,  0,  0,  0, -5,
-            5, 10, 10, 10, 10, 10, 10,  5,
-            0,  0,  0,  5,  5,  0,  0,  0
-    };
-    public final static int[] WHITE_QUEEN_PREFERRED_COORDINATES = {
-            -20,-10,-10, -5, -5,-10,-10,-20,
-            -10,  0,  0,  0,  0,  5,  0,-10,
-            -10,  0,  5,  5,  5,  5,  5,-10,
-            -5,  0,  5,  5,  5,  5,  0, -5,
-            0,  0,  5,  5,  5,  5,  0, -5,
-            -10,  5,  5,  5,  5,  5,  0,-10,
-            -10,  0,  5,  0,  0,  0,  0,-10,
-            -20,-10,-10, -5, -5,-10,-10,-20
-    };
-    public final static int[] BLACK_QUEEN_PREFERRED_COORDINATES = {
-            -20,-10,-10, -5, -5,-10,-10,-20,
-            -10,  0,  5,  0,  0,  0,  0,-10,
-            -10,  5,  5,  5,  5,  5,  0,-10,
-            0,  0,  5,  5,  5,  5,  0, -5,
-            -5,  0,  5,  5,  5,  5,  0, -5,
-            -10,  0,  5,  5,  5,  5,  5,-10,
-            -10,  0,  0,  0,  0,  5,  0,-10,
-            -20,-10,-10, -5, -5,-10,-10,-20
-    };
-    public final static int[] WHITE_KING_PREFERRED_COORDINATES = {
-            -30,-40,-40,-50,-50,-40,-40,-30,
-            -30,-40,-40,-50,-50,-40,-40,-30,
-            -30,-40,-40,-50,-50,-40,-40,-30,
-            -30,-40,-40,-50,-50,-40,-40,-30,
-            -20,-30,-30,-40,-40,-30,-30,-20,
-            -10,-20,-20,-20,-20,-20,-20,-10,
-            20, 20,  0,  0,  0,  0, 20, 20,
-            20, 30, 10,  0,  0, 10, 30, 20
-    };
-    public final static int[] BLACK_KING_PREFERRED_COORDINATES = {
-            20, 30, 10,  0,  0, 10, 30, 20,
-            20, 20,  0,  0,  0,  0, 20, 20,
-            -10,-20,-20,-20,-20,-20,-20,-10,
-            -20,-30,-30,-40,-40,-30,-30,-20,
-            -30,-40,-40,-50,-50,-40,-40,-30,
-            -30,-40,-40,-50,-50,-40,-40,-30,
-            -30,-40,-40,-50,-50,-40,-40,-30,
-            -30,-40,-40,-50,-50,-40,-40,-30
-    };
 
     private static List<Boolean> initColumn(int columnNumber) {
         final Boolean[] column = new Boolean[NUM_TILES];
@@ -215,17 +95,13 @@ public enum  BoardUtils {
         return ALGEBRAIC_NOTATION.get(coordinate);
     }
 
-    public static boolean isThreatenedBoardImmediate(final Board board) {
-        return board.whitePlayer().isInCheck() || board.blackPlayer().isInCheck();
-    }
-
     public static boolean isKingPawnTrap(final Board board,
                                          final King king,
                                          final int frontTile) {
         final Piece piece = board.getPiece(frontTile);
         return piece != null &&
-               piece.getPieceType() == Piece.PieceType.PAWN &&
-               piece.getPieceAllegiance() != king.getPieceAllegiance();
+                piece.getPieceType() == Piece.PieceType.PAWN &&
+                piece.getPieceAllegiance() != king.getPieceAllegiance();
     }
 
     public static int mvvlva(final Move move) {
@@ -237,8 +113,41 @@ public enum  BoardUtils {
         return (victimValue * 10) - attackerValue + (move.getMovedPiece().getPieceType() == Piece.PieceType.PAWN ? 10 : 0);
     }
 
+
     public static boolean isEndGame(final Board board) {
         return board.currentPlayer().isInCheckMate() ||
                board.currentPlayer().isInStaleMate();
     }
+
+    public static String humanReadableElapsedTime(long millis) {
+        if (millis < 0) {
+            throw new IllegalArgumentException("Duration must be non-negative");
+        }
+
+        long seconds = millis / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long days = hours / 24;
+
+        seconds %= 60;
+        minutes %= 60;
+        hours %= 24;
+
+        StringBuilder sb = new StringBuilder();
+        if (days > 0) sb.append(days).append(days == 1 ? " day" : " days");
+        if (hours > 0) {
+            if (!sb.isEmpty()) sb.append(", ");
+            sb.append(hours).append(hours == 1 ? " hour" : " hours");
+        }
+        if (minutes > 0) {
+            if (!sb.isEmpty()) sb.append(", ");
+            sb.append(minutes).append(minutes == 1 ? " minute" : " minutes");
+        }
+        if (seconds > 0 || sb.isEmpty()) {
+            if (!sb.isEmpty()) sb.append(", ");
+            sb.append(seconds).append(seconds == 1 ? " second" : " seconds");
+        }
+        return sb.toString();
+    }
+
 }
