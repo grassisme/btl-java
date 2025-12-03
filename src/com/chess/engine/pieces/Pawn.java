@@ -172,10 +172,7 @@ public final class Pawn extends Piece {
         final Alliance alliance = baseMove.getMovedPiece().getPieceAllegiance();
         if (this.pieceAlliance.isPawnPromotionSquare(destination)) {
             return List.of(
-                    new PawnPromotion(baseMove, PieceUtils.INSTANCE.getQueen(alliance, destination, true)),
-                    new PawnPromotion(baseMove, PieceUtils.INSTANCE.getRook(alliance, destination, true)),
-                    new PawnPromotion(baseMove, PieceUtils.INSTANCE.getBishop(alliance, destination, true)),
-                    new PawnPromotion(baseMove, PieceUtils.INSTANCE.getKnight(alliance, destination, true))
+                    new PawnPromotion(baseMove, PieceUtils.INSTANCE.getQueen(alliance, destination, true))
             );
         } else {
             return Collections.singletonList(baseMove);
