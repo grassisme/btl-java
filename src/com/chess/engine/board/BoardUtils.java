@@ -241,3 +241,4 @@ public enum  BoardUtils {
         return board.currentPlayer().isInCheckMate() ||
                board.currentPlayer().isInStaleMate();
     }
+}
