@@ -72,11 +72,6 @@ public final class Queen extends Piece {
     }
 
     @Override
-    public int locationBonus() {
-        return this.pieceAlliance.queenBonus(this.piecePosition);
-    }
-
-    @Override
     public Queen getMovedPiece(final Move move) {
         return PieceUtils.INSTANCE.getQueen(move.getMovedPiece().getPieceAllegiance(), move.getDestinationCoordinate(), true);
     }

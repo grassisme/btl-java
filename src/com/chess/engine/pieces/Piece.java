@@ -45,8 +45,6 @@ public abstract class Piece {
         return this.pieceType.getPieceValue();
     }
 
-    public abstract int locationBonus();
-
     public abstract Piece getMovedPiece(Move move);
 
     public abstract Collection<Move> calculateLegalMoves(final Board board);

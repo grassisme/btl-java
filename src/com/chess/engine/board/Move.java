@@ -96,7 +96,7 @@ public abstract class Move {
     public Board undo() {
         final Board.Builder builder = new Board.Builder();
         for (final Piece piece : this.board.getAllPieces()) {
-            builder.setPiece(piece); // (Lưu ý: Logic này có thể phức tạp hơn tùy implement của bạn)
+            builder.setPiece(piece);
         }
         builder.setMoveMaker(this.movedPiece.getPieceAllegiance());
 

@@ -19,17 +19,10 @@ public class GameSetup extends JDialog {
         JLabel title = new JLabel("Game Options");
         title.setFont(new Font("Arial", Font.BOLD, 16));
         title.setHorizontalAlignment(SwingConstants.CENTER);
-
-        JLabel modeLabel = new JLabel("Mode: Player vs Player (Hot Seat)");
-        JLabel infoLabel = new JLabel("Play moves alternatively on this device.");
-        JLabel infoLabel2 = new JLabel("Board will rotate automatically.");
         
         getContentPane().add(myPanel);
         myPanel.add(title);
         myPanel.add(new JSeparator());
-        myPanel.add(modeLabel);
-        myPanel.add(infoLabel);
-        myPanel.add(infoLabel2);
         myPanel.add(new JSeparator());
 
         final JButton cancelButton = new JButton("Cancel");
@@ -58,10 +51,5 @@ public class GameSetup extends JDialog {
         setLocationRelativeTo(frame);
         pack();
         setVisible(false);
-    }
-
-    void promptUser() {
-        setVisible(true);
-        repaint();
     }
 }

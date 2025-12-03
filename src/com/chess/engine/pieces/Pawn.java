@@ -91,11 +91,6 @@ public final class Pawn extends Piece {
     }
 
     @Override
-    public int locationBonus() {
-        return this.pieceAlliance.pawnBonus(this.piecePosition);
-    }
-
-    @Override
     public Collection<Move> calculateLegalMoves(final Board board) {
         final List<Move> legalMoves = new ArrayList<>();
         for (final PawnMoveStrategy strategy : PawnMoveStrategy.values()) {

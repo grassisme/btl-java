@@ -46,20 +46,12 @@ public abstract class Player {
         return !this.isInCheck && this.isTrapped();
     }
 
-    public boolean isCastled() {
-        return this.playerKing.isCastled();
-    }
-
     public boolean isKingSideCastleCapable() {
         return this.playerKing.isKingSideCastleCapable();
     }
 
     public boolean isQueenSideCastleCapable() {
         return this.playerKing.isQueenSideCastleCapable();
-    }
-
-    public King getPlayerKing() {
-        return this.playerKing;
     }
 
     private boolean isTrapped() {
