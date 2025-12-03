@@ -37,7 +37,6 @@ public final class Table {
     private Piece humanMovedPiece;
     private BoardDirection boardDirection;
     private String pieceIconPath;
-    private boolean highlightLegalMoves;
     private Color lightTileColor = Color.decode("#FFFACD");
     private Color darkTileColor = Color.decode("#593E1A");
 
@@ -56,7 +55,6 @@ public final class Table {
         this.gameFrame.setLayout(new BorderLayout());
         this.chessBoard = Board.createStandardBoard();
         this.boardDirection = BoardDirection.NORMAL;
-        this.highlightLegalMoves = false;
 
         this.pieceIconPath = "art/simple/";
 
@@ -91,7 +89,6 @@ public final class Table {
     private BoardPanel getBoardPanel() { return this.boardPanel; }
     private GameHistoryPanel getGameHistoryPanel() { return this.gameHistoryPanel; }
     private TakenPiecesPanel getTakenPiecesPanel() { return this.takenPiecesPanel; }
-    public boolean getHighlightLegalMoves() { return this.highlightLegalMoves; }
 
     public void show() {
         Table.get().getGameHistoryPanel().redo(this.chessBoard, Table.get().getMoveLog());
@@ -121,6 +118,8 @@ public final class Table {
         undoAllMoves();
         this.chessBoard = Board.createStandardBoard();
         this.boardDirection = BoardDirection.NORMAL;
+        Table.get().getMoveLog().clear();
+        Table.get().getGameHistoryPanel().redo(this.chessBoard, Table.get().getMoveLog());
         this.show();
     }
 
@@ -209,9 +208,6 @@ public final class Table {
         preferencesMenu.add(flipBoardMenuItem);
 
         preferencesMenu.addSeparator();
-        final JCheckBoxMenuItem cbLegalMoveHighlighter = new JCheckBoxMenuItem("Highlight Legal Moves", false);
-        cbLegalMoveHighlighter.addActionListener(_ -> highlightLegalMoves = cbLegalMoveHighlighter.isSelected());
-        preferencesMenu.add(cbLegalMoveHighlighter);
 
         return preferencesMenu;
     }
@@ -227,13 +223,35 @@ public final class Table {
 
     private void undoLastMove() {
         final MoveLog log = Table.get().getMoveLog();
-        if(!log.isEmpty()) {
-            final Move lastMove = Table.get().getMoveLog().removeMove(Table.get().getMoveLog().size() - 1);
+
+        // Chỉ undo nếu lịch sử có nước đi
+        if (!log.isEmpty()) {
+
+            // BƯỚC 1: Lấy nước đi vừa thực hiện (Nước Trắng đi lỗi)
+            final Move lastMove = log.removeMove(log.size() - 1);
+
+            // BƯỚC 2: Trả lại vị trí cũ & Trả lại lượt đi
+            // Logic: Hàm unMakeMove sẽ tạo ra bàn cờ quá khứ.
+            // Ở bàn cờ quá khứ này, người có lượt đi CHÍNH LÀ người vừa thực hiện lastMove.
             this.chessBoard = this.chessBoard.currentPlayer().unMakeMove(lastMove).getToBoard();
-            this.boardDirection = this.boardDirection.opposite();
+
+            // BƯỚC 3: Xoay bàn cờ (Logic quan trọng nhất ở đây)
+            // Thay vì chỉ đảo ngược mù quáng, ta ép bàn cờ xoay về phía người vừa được nhận lại lượt.
+
+            // Kiểm tra: Ai là người vừa được trả lại lượt? (Chính là phe của quân cờ trong lastMove)
+            if (lastMove.getMovedPiece().getPieceAllegiance().isWhite()) {
+                // Nếu quân vừa thu về là Trắng -> Lượt của Trắng -> Xoay mặt Trắng xuống
+                this.boardDirection = BoardDirection.NORMAL;
+            } else {
+                // Nếu quân vừa thu về là Đen -> Lượt của Đen -> Xoay mặt Đen xuống
+                this.boardDirection = BoardDirection.FLIPPED;
+            }
+
+            // Cập nhật giao diện
             this.show();
         }
     }
+
 
     public void moveMadeUpdate(final PlayerType playerType, final Move move) {
         this.eventManager.publishGameEvent(new MoveMadeEvent(move, playerType));
