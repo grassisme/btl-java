@@ -104,16 +104,6 @@ public enum  BoardUtils {
                 piece.getPieceAllegiance() != king.getPieceAllegiance();
     }
 
-    public static int mvvlva(final Move move) {
-        if (!move.isAttack()) {
-            return 0;
-        }
-        final int victimValue = move.getAttackedPiece().getPieceValue();
-        final int attackerValue = move.getMovedPiece().getPieceValue();
-        return (victimValue * 10) - attackerValue + (move.getMovedPiece().getPieceType() == Piece.PieceType.PAWN ? 10 : 0);
-    }
-
-
     public static boolean isEndGame(final Board board) {
         return board.currentPlayer().isInCheckMate() ||
                board.currentPlayer().isInStaleMate();
