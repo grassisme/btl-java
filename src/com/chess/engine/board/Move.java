@@ -626,10 +626,6 @@ public abstract class Move {
 
     public static class MoveFactory {
 
-        private MoveFactory() {
-            throw new RuntimeException("Not instantiatable!");
-        }
-
         public static Move createMove(final Board board,
                                       final int currentCoordinate,
                                       final int destinationCoordinate) {
